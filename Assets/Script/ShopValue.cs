@@ -1,0 +1,35 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
+using YG;
+
+public class ShopValue : MonoBehaviour
+{
+    public int WoodCost;
+    public TextMeshProUGUI WoodText;
+    public Button BuildButton;
+
+
+    public void ValueChange()
+    {
+        Wood.instance.WoodCount -= 50;
+        DiamondChkeer.instance.Diamond += 25;
+        YandexGame.FullscreenShow();
+    }
+
+    void Update()
+    {
+
+        if (Wood.instance.WoodCount >= 49)
+        {
+            BuildButton.interactable = true;
+        }
+
+        if (Wood.instance.WoodCount <= 49)
+        {
+            BuildButton.interactable = false;
+        }
+    }
+}
