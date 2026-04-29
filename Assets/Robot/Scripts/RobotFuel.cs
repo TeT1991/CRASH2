@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using JetSystems;
+using NuclearDecline;
 
 public class RobotFuel : MonoBehaviour
 {
@@ -73,6 +74,7 @@ public class RobotFuel : MonoBehaviour
         SaveData();
 
         UpdateUI();
+        GamePlatformBridge.Ads.ShowInterstitial();
     }
 
     private void UpdateUI()

@@ -11,6 +11,7 @@ namespace NuclearDecline
 
         IAdsService Ads { get; }
         ILocalizationService Localization { get; }
+        ILeaderboardService Leaderboards { get; }
         ISaveService Saves { get; }
 
         event Action OnReady;

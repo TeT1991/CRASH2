@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using JetSystems;
+using NuclearDecline;
 
 public class RobotUpgrade : MonoBehaviour
 {
@@ -67,7 +68,7 @@ public class RobotUpgrade : MonoBehaviour
 
         robot.AddArm();
 
-        
+        GamePlatformBridge.Ads.ShowInterstitial();
     }
 
     // Update is called once per frame

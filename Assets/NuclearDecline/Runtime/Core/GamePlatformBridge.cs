@@ -26,6 +26,7 @@ namespace NuclearDecline
         public static IAdsService Ads => Platform.Ads;
         public static ISaveService Saves => Platform.Saves;
         public static ILocalizationService Localization => Platform.Localization;
+        public static ILeaderboardService Leaderboards => Platform.Leaderboards;
 
         public static bool IsInitialized => service != null && service.IsInitialized;
 

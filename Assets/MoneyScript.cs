@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using JetSystems;
+using NuclearDecline;
 
 public class MoneyScript : MonoBehaviour
 {
@@ -34,6 +35,22 @@ public class MoneyScript : MonoBehaviour
     {
         if (rewardClaimed)
             return;
+
+        if (button != null)
+            button.interactable = false;
+
+        GamePlatformBridge.Ads.ShowRewarded("double_reward", OnRewardedAdComplete);
+    }
+
+    private void OnRewardedAdComplete(AdResult result)
+    {
+        if (!result.IsSuccess)
+        {
+            if (button != null)
+                button.interactable = true;
+
+            return;
+        }
 
         int bonus = GetEarnedCoins();
         earnedCoins = bonus;

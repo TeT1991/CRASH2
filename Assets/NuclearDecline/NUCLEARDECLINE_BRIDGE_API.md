@@ -1,6 +1,6 @@
 # NuclearDecline Game Platform Bridge API
 
-Developer-facing reference for `NuclearDecline.GamePlatformBridge`, the platform abstraction used by gameplay code to access ads, saves, localization, and platform lifecycle events without depending on Yandex Games, Plugin Your Games, or any SDK API directly.
+Developer-facing reference for `NuclearDecline.GamePlatformBridge`, the platform abstraction used by gameplay code to access ads, saves, localization, leaderboards, and platform lifecycle events without depending on Yandex Games, Plugin Your Games, or any SDK API directly.
 
 ## Purpose
 
@@ -11,6 +11,7 @@ Use it when gameplay needs to:
 - show interstitial or rewarded ads;
 - read or write persistent values;
 - read or change the active language;
+- submit or request leaderboard data;
 - notify the host platform about game readiness or gameplay state.
 
 If no platform adapter is provided, the bridge initializes a safe `MockPlatformService` for editor and non-platform environments.
@@ -27,6 +28,7 @@ IPlatformService GamePlatformBridge.Service
 IAdsService GamePlatformBridge.Ads
 ISaveService GamePlatformBridge.Saves
 ILocalizationService GamePlatformBridge.Localization
+ILeaderboardService GamePlatformBridge.Leaderboards
 bool GamePlatformBridge.IsInitialized
 
 event Action<IPlatformService> GamePlatformBridge.PlatformChanged
@@ -37,7 +39,7 @@ void GamePlatformBridge.Initialize(IPlatformService platformService = null)
 
 Notes:
 
-- Accessing `Platform`, `Service`, `Ads`, `Saves`, or `Localization` lazily initializes the bridge if needed.
+- Accessing `Platform`, `Service`, `Ads`, `Saves`, `Localization`, or `Leaderboards` lazily initializes the bridge if needed.
 - `Initialize()` uses `MockPlatformService` when `platformService` is `null`.
 - A real initialized non-mock platform service is not replaced by later calls.
 - `GamePlatformBridgeBootstrap` initializes the bridge before scene load.
@@ -56,6 +58,7 @@ string PlayerId { get; }
 IAdsService Ads { get; }
 ILocalizationService Localization { get; }
 ISaveService Saves { get; }
+ILeaderboardService Leaderboards { get; }
 
 event Action OnReady;
 
@@ -137,6 +140,17 @@ string GetText(string key);
 ```
 
 Use `IsLanguageSupported()` before setting a user-selected language. Subscribe to one language change event per component; both events expose the new language code.
+
+## ILeaderboardService
+
+Minimal leaderboard bridge.
+
+```csharp
+void SetScore(string leaderboardName, int score);
+void RequestLeaderboard(string leaderboardName);
+```
+
+Gameplay can submit scores through the bridge, but UI rendering and leaderboard balance remain gameplay concerns.
 
 ## AdResult
 
@@ -258,11 +272,23 @@ private void EndRun()
 }
 ```
 
+Submit a score:
+
+```csharp
+using NuclearDecline;
+
+public void SubmitScore(int score)
+{
+    GamePlatformBridge.Leaderboards.SetScore("leaderboard", score);
+}
+```
+
 ## Boundaries
 
 - Gameplay code may use `GamePlatformBridge` and the interfaces in this document.
 - Gameplay code must not call Yandex Games, `YaGames`, `YandexGame`, `YG`, Plugin Your Games, or SDK-specific APIs directly.
 - Platform-specific behavior belongs in an adapter that implements `IPlatformService`, `IAdsService`, `ISaveService`, and `ILocalizationService`.
+- The bridge routes leaderboard calls, but it does not own score rules or gameplay balance.
 - Keep SDK types, callbacks, and initialization details inside the adapter layer.
 - Do not store scene, prefab, or serialized gameplay references inside platform adapters unless explicitly required.
 - Mock implementations should remain safe for editor, tests, and non-Yandex builds.

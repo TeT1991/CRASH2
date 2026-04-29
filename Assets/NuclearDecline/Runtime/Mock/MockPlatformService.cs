@@ -14,6 +14,7 @@ namespace NuclearDecline
 
         public IAdsService Ads { get; private set; }
         public ILocalizationService Localization { get; private set; }
+        public ILeaderboardService Leaderboards { get; private set; }
         public ISaveService Saves { get; private set; }
 
         public void Initialize()
@@ -24,6 +25,7 @@ namespace NuclearDecline
             Saves = new MockSaveService();
             Localization = new MockLocalizationService(Saves);
             Ads = new MockAdsService();
+            Leaderboards = new MockLeaderboardService();
 
             IsInitialized = true;
             IsReady = true;
