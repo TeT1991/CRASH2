@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using YG;
 
 public class ShopValue : MonoBehaviour
 {
@@ -16,7 +15,7 @@ public class ShopValue : MonoBehaviour
     {
         Wood.instance.WoodCount -= 50;
         DiamondChkeer.instance.Diamond += 25;
-        YandexGame.FullscreenShow();
+        NuclearDecline.GamePlatformBridge.Ads.ShowInterstitial();
     }
 
     void Update()

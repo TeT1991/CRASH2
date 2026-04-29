@@ -1,8 +1,8 @@
-using GamePlatform.Runtime.Ads;
-using GamePlatform.Runtime.Localization;
-using GamePlatform.Runtime.Saves;
+using NuclearDecline.Runtime.Ads;
+using NuclearDecline.Runtime.Localization;
+using NuclearDecline.Runtime.Saves;
 
-namespace GamePlatform.Runtime.Core
+namespace NuclearDecline.Runtime.Core
 {
     public interface IPlatformService
     {

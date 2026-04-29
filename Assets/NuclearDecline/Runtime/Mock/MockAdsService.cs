@@ -1,8 +1,8 @@
 using System;
-using GamePlatform.Runtime.Ads;
+using NuclearDecline.Runtime.Ads;
 using UnityEngine;
 
-namespace GamePlatform.Runtime.Mock
+namespace NuclearDecline.Runtime.Mock
 {
     public sealed class MockAdsService : IAdsService
     {
@@ -11,13 +11,13 @@ namespace GamePlatform.Runtime.Mock
 
         public void ShowInterstitial(Action<AdResult> onComplete = null)
         {
-            Debug.Log("[GamePlatform] Mock interstitial ad shown.");
+            Debug.Log("[NuclearDecline] Mock interstitial ad shown.");
             onComplete?.Invoke(AdResult.Completed);
         }
 
         public void ShowRewarded(string placementId, Action<AdResult> onComplete = null)
         {
-            Debug.Log("[GamePlatform] Mock rewarded ad shown. Placement: " + placementId);
+            Debug.Log("[NuclearDecline] Mock rewarded ad shown. Placement: " + placementId);
             onComplete?.Invoke(AdResult.Completed);
         }
     }

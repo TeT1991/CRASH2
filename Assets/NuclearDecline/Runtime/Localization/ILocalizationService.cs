@@ -1,6 +1,6 @@
 using System;
 
-namespace GamePlatform.Runtime.Localization
+namespace NuclearDecline.Runtime.Localization
 {
     public interface ILocalizationService
     {

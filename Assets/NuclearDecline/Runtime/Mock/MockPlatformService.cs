@@ -1,10 +1,10 @@
-using GamePlatform.Runtime.Ads;
-using GamePlatform.Runtime.Core;
-using GamePlatform.Runtime.Localization;
-using GamePlatform.Runtime.Saves;
+using NuclearDecline.Runtime.Ads;
+using NuclearDecline.Runtime.Core;
+using NuclearDecline.Runtime.Localization;
+using NuclearDecline.Runtime.Saves;
 using UnityEngine;
 
-namespace GamePlatform.Runtime.Mock
+namespace NuclearDecline.Runtime.Mock
 {
     public sealed class MockPlatformService : IPlatformService
     {
@@ -25,7 +25,7 @@ namespace GamePlatform.Runtime.Mock
             Ads = new MockAdsService();
 
             IsInitialized = true;
-            Debug.Log("[GamePlatform] Mock platform service ready.");
+            Debug.Log("[NuclearDecline] Mock platform service ready.");
         }
     }
 }

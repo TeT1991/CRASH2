@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using YG;
 public class Build : MonoBehaviour
 {
     public GameObject Self;
@@ -17,7 +16,7 @@ public class Build : MonoBehaviour
     {
         Wood.instance.WoodCount -= WoodCostText;
         Self.SetActive(false);
-        YandexGame.FullscreenShow();
+        NuclearDecline.GamePlatformBridge.Ads.ShowInterstitial();
     }
 
     void Update()

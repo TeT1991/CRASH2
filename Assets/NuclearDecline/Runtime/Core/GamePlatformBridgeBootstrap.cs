@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace GamePlatform.Runtime.Core
+namespace NuclearDecline
 {
-    public sealed class GamePlatformBootstrap : MonoBehaviour
+    public sealed class GamePlatformBridgeBootstrap : MonoBehaviour
     {
         private static bool bootstrapped;
 
@@ -14,16 +14,16 @@ namespace GamePlatform.Runtime.Core
 
             bootstrapped = true;
 
-            GameObject bootstrapObject = new GameObject(nameof(GamePlatformBootstrap));
+            GameObject bootstrapObject = new GameObject(nameof(GamePlatformBridgeBootstrap));
             DontDestroyOnLoad(bootstrapObject);
-            bootstrapObject.AddComponent<GamePlatformBootstrap>();
+            bootstrapObject.AddComponent<GamePlatformBridgeBootstrap>();
 
-            GamePlatform.Initialize();
+            GamePlatformBridge.Initialize();
         }
 
         private void Awake()
         {
-            GamePlatform.Initialize();
+            GamePlatformBridge.Initialize();
         }
     }
 }

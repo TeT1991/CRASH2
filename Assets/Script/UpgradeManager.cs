@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using YG;
 public class UpgradeManager : MonoBehaviour
 {
     public GameObject Self;
@@ -20,7 +19,7 @@ public class UpgradeManager : MonoBehaviour
         Wood.instance.WoodCount -= WoodCostText;
         LevelText += 1;
         Self.SetActive(false);
-        YandexGame.FullscreenShow();
+        NuclearDecline.GamePlatformBridge.Ads.ShowInterstitial();
     }
 
     // Update is called once per frame

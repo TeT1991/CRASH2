@@ -1,4 +1,4 @@
-namespace GamePlatform.Runtime.Saves
+namespace NuclearDecline.Runtime.Saves
 {
     public interface ISaveService
     {

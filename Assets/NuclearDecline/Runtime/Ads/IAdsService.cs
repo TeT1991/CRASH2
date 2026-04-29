@@ -1,6 +1,6 @@
 using System;
 
-namespace GamePlatform.Runtime.Ads
+namespace NuclearDecline.Runtime.Ads
 {
     public interface IAdsService
     {

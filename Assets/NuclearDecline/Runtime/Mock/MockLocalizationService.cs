@@ -1,13 +1,13 @@
 using System;
-using GamePlatform.Runtime.Localization;
-using GamePlatform.Runtime.Saves;
+using NuclearDecline.Runtime.Localization;
+using NuclearDecline.Runtime.Saves;
 using UnityEngine;
 
-namespace GamePlatform.Runtime.Mock
+namespace NuclearDecline.Runtime.Mock
 {
     public sealed class MockLocalizationService : ILocalizationService
     {
-        private const string LanguageKey = "GamePlatform.Language";
+        private const string LanguageKey = "NuclearDecline.Language";
         private readonly ISaveService saveService;
 
         public event Action<string> LanguageChanged;
@@ -32,7 +32,7 @@ namespace GamePlatform.Runtime.Mock
             saveService.SetString(LanguageKey, CurrentLanguage);
             saveService.Save();
 
-            Debug.Log("[GamePlatform] Mock language changed: " + CurrentLanguage);
+            Debug.Log("[NuclearDecline] Mock language changed: " + CurrentLanguage);
             LanguageChanged?.Invoke(CurrentLanguage);
         }
     }

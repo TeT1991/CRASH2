@@ -1,12 +1,13 @@
-using GamePlatform.Runtime.Ads;
-using GamePlatform.Runtime.Localization;
-using GamePlatform.Runtime.Mock;
-using GamePlatform.Runtime.Saves;
+using NuclearDecline.Runtime.Ads;
+using NuclearDecline.Runtime.Core;
+using NuclearDecline.Runtime.Localization;
+using NuclearDecline.Runtime.Mock;
+using NuclearDecline.Runtime.Saves;
 using UnityEngine;
 
-namespace GamePlatform.Runtime.Core
+namespace NuclearDecline
 {
-    public static class GamePlatform
+    public static class GamePlatformBridge
     {
         private static IPlatformService service;
 
@@ -33,7 +34,7 @@ namespace GamePlatform.Runtime.Core
             service = platformService ?? new MockPlatformService();
             service.Initialize();
 
-            Debug.Log("[GamePlatform] Initialized: " + service.PlatformName);
+            Debug.Log("[NuclearDecline] GamePlatformBridge initialized: " + service.PlatformName);
         }
 
         private static void EnsureInitialized()

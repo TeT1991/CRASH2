@@ -1,7 +1,7 @@
-using GamePlatform.Runtime.Saves;
+using NuclearDecline.Runtime.Saves;
 using UnityEngine;
 
-namespace GamePlatform.Runtime.Mock
+namespace NuclearDecline.Runtime.Mock
 {
     public sealed class MockSaveService : ISaveService
     {
@@ -54,7 +54,7 @@ namespace GamePlatform.Runtime.Mock
         public void Save()
         {
             PlayerPrefs.Save();
-            Debug.Log("[GamePlatform] Mock save flushed.");
+            Debug.Log("[NuclearDecline] Mock save flushed.");
         }
 
         public void DeleteKey(string key)
