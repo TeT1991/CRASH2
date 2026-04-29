@@ -4929,6 +4929,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47aaa269f475bf34cabfeb4dcdbf018b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  noIncomeEndDelay: 15
 --- !u!224 &2004315701 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4782243446611037076, guid: b81225940c8154a91a62cb4b074afe45, type: 3}
@@ -6857,7 +6858,6 @@ GameObject:
   - component: {fileID: 1327868891951891539}
   - component: {fileID: 1327868891951891541}
   - component: {fileID: 1327868891951891540}
-  - component: {fileID: 1327868891951891542}
   m_Layer: 5
   m_Name: Coins Amount
   m_TagString: Untagged
@@ -6926,55 +6926,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1327868891951891538}
   m_CullTransparentMesh: 0
---- !u!114 &1327868891951891542
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1327868891951891538}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f34f36451b093ee4c83ad4aa5459d2ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textUIComponent: {fileID: 1327868891951891540}
-  textMeshComponent: {fileID: 0}
-  infoYG: {fileID: 11400000, guid: 162644796a8b0d044bce3d6fda0641e3, type: 2}
-  text: 
-  ru: 98418
-  en: 98418
-  tr: 98418
-  az: 
-  be: 
-  he: 
-  hy: 
-  ka: 
-  et: 
-  fr: 
-  kk: 
-  ky: 
-  lt: 
-  lv: 
-  ro: 
-  tg: 
-  tk: 
-  uk: 
-  uz: 
-  es: 
-  pt: 
-  ar: 
-  id: 
-  ja: 
-  it: 
-  de: 
-  hi: 
-  fontNumber: 0
-  uniqueFont: {fileID: 0}
-  textHeight: 20
-  processTranslateLabel: 3/19 completed
-  componentTextField: 1
-  countLang: 3
 --- !u!114 &1327868891986376616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15594,7 +15545,6 @@ GameObject:
   - component: {fileID: 8088797753416017677}
   - component: {fileID: 8088797753416017675}
   - component: {fileID: 8088797753416017674}
-  - component: {fileID: 8088797753416017678}
   m_Layer: 5
   m_Name: Coins Amount
   m_TagString: Untagged
@@ -15621,55 +15571,6 @@ RectTransform:
   m_AnchoredPosition: {x: -68, y: -3.125}
   m_SizeDelta: {x: 158.19, y: 56.25}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &8088797753416017678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8088797753416017676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f34f36451b093ee4c83ad4aa5459d2ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textUIComponent: {fileID: 8088797753416017674}
-  textMeshComponent: {fileID: 0}
-  infoYG: {fileID: 11400000, guid: 162644796a8b0d044bce3d6fda0641e3, type: 2}
-  text: 
-  ru: 98418
-  en: 98418
-  tr: 98418
-  az: 
-  be: 
-  he: 
-  hy: 
-  ka: 
-  et: 
-  fr: 
-  kk: 
-  ky: 
-  lt: 
-  lv: 
-  ro: 
-  tg: 
-  tk: 
-  uk: 
-  uz: 
-  es: 
-  pt: 
-  ar: 
-  id: 
-  ja: 
-  it: 
-  de: 
-  hi: 
-  fontNumber: 0
-  uniqueFont: {fileID: 0}
-  textHeight: 20
-  processTranslateLabel: 3/19 completed
-  componentTextField: 1
-  countLang: 3
 --- !u!114 &8088797753423255672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15892,7 +15793,6 @@ GameObject:
   - component: {fileID: 8088797753480535762}
   - component: {fileID: 8088797753480535760}
   - component: {fileID: 8088797753480535763}
-  - component: {fileID: 8088797753480535766}
   m_Layer: 5
   m_Name: Coins Amount
   m_TagString: Untagged
@@ -15900,55 +15800,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &8088797753480535766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8088797753480535765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f34f36451b093ee4c83ad4aa5459d2ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  textUIComponent: {fileID: 8088797753480535763}
-  textMeshComponent: {fileID: 0}
-  infoYG: {fileID: 11400000, guid: 162644796a8b0d044bce3d6fda0641e3, type: 2}
-  text: 
-  ru: 98418
-  en: 98418
-  tr: 98418
-  az: 
-  be: 
-  he: 
-  hy: 
-  ka: 
-  et: 
-  fr: 
-  kk: 
-  ky: 
-  lt: 
-  lv: 
-  ro: 
-  tg: 
-  tk: 
-  uk: 
-  uz: 
-  es: 
-  pt: 
-  ar: 
-  id: 
-  ja: 
-  it: 
-  de: 
-  hi: 
-  fontNumber: 0
-  uniqueFont: {fileID: 0}
-  textHeight: 20
-  processTranslateLabel: 3/19 completed
-  componentTextField: 1
-  countLang: 3
 --- !u!114 &8088797753561511068
 MonoBehaviour:
   m_ObjectHideFlags: 0
