@@ -19,7 +19,15 @@ public class UpgradeManager : MonoBehaviour
         Wood.instance.WoodCount -= WoodCostText;
         LevelText += 1;
         Self.SetActive(false);
-        NuclearDecline.GamePlatformBridge.Ads.ShowInterstitial();
+        ShowInterstitial();
+    }
+
+    private void ShowInterstitial()
+    {
+        if (!NuclearDecline.GamePlatformBridge.IsInitialized)
+            NuclearDecline.GamePlatformBridge.Initialize();
+
+        NuclearDecline.GamePlatformBridge.Ads?.ShowInterstitial();
     }
 
     // Update is called once per frame

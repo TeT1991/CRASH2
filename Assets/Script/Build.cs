@@ -16,7 +16,15 @@ public class Build : MonoBehaviour
     {
         Wood.instance.WoodCount -= WoodCostText;
         Self.SetActive(false);
-        NuclearDecline.GamePlatformBridge.Ads.ShowInterstitial();
+        ShowInterstitial();
+    }
+
+    private void ShowInterstitial()
+    {
+        if (!NuclearDecline.GamePlatformBridge.IsInitialized)
+            NuclearDecline.GamePlatformBridge.Initialize();
+
+        NuclearDecline.GamePlatformBridge.Ads?.ShowInterstitial();
     }
 
     void Update()

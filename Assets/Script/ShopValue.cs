@@ -15,7 +15,15 @@ public class ShopValue : MonoBehaviour
     {
         Wood.instance.WoodCount -= 50;
         DiamondChkeer.instance.Diamond += 25;
-        NuclearDecline.GamePlatformBridge.Ads.ShowInterstitial();
+        ShowInterstitial();
+    }
+
+    private void ShowInterstitial()
+    {
+        if (!NuclearDecline.GamePlatformBridge.IsInitialized)
+            NuclearDecline.GamePlatformBridge.Initialize();
+
+        NuclearDecline.GamePlatformBridge.Ads?.ShowInterstitial();
     }
 
     void Update()

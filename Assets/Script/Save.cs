@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using YG;
 public class Save : MonoBehaviour
 {
     public GameObject Pause;
@@ -18,7 +17,7 @@ public class Save : MonoBehaviour
         {
             Application.LoadLevel("Menu");
             Timmmer.Timer = 0;
-            YandexGame.FullscreenShow();
+            ShowInterstitial();
             Cursor.lockState = CursorLockMode.Confined;
         }
 
@@ -28,4 +27,11 @@ public class Save : MonoBehaviour
         }
     }
 
+    private void ShowInterstitial()
+    {
+        if (!NuclearDecline.GamePlatformBridge.IsInitialized)
+            NuclearDecline.GamePlatformBridge.Initialize();
+
+        NuclearDecline.GamePlatformBridge.Ads?.ShowInterstitial();
+    }
 }
