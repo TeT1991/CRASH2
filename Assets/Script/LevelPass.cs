@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using YG;
+
 public class LevelPass : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)

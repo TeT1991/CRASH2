@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using NuclearDecline;
 
 #if UNITY_EDITOR
 using System.Collections;
@@ -40,19 +41,43 @@ namespace YG
         {
             textUIComponent = GetComponent<Text>();
             textMeshComponent = GetComponent<TextMesh>();
-            infoYG = GameObject.Find("YandexGame").GetComponent<YandexGame>().infoYG;
+
+#if UNITY_EDITOR
+            if (infoYG == null)
+            {
+                string[] guids = UnityEditor.AssetDatabase.FindAssets("t:InfoYG");
+                if (guids.Length > 0)
+                {
+                    string path = UnityEditor.AssetDatabase.GUIDToAssetPath(guids[0]);
+                    infoYG = UnityEditor.AssetDatabase.LoadAssetAtPath<InfoYG>(path);
+                }
+            }
+#endif
         }
 
         private void OnEnable()
         {
-            YandexGame.SwitchLangEvent += SwitchLanguage;
-            SwitchLanguage(YandexGame.savesData.language);
+            GamePlatformBridge.PlatformChanged += HandlePlatformChanged;
+            GamePlatformBridge.LanguageChanged += SwitchLanguage;
+            SwitchLanguage(GamePlatformBridge.Localization.CurrentLanguage);
         }
 
-        private void OnDisable() => YandexGame.SwitchLangEvent -= SwitchLanguage;
+        private void OnDisable()
+        {
+            GamePlatformBridge.PlatformChanged -= HandlePlatformChanged;
+            GamePlatformBridge.LanguageChanged -= SwitchLanguage;
+        }
+
+        private void HandlePlatformChanged(IPlatformService platform)
+        {
+            SwitchLanguage(platform.Localization.CurrentLanguage);
+        }
 
         public void SwitchLanguage(string lang)
         {
+            if (infoYG == null)
+                return;
+
             for (int i = 0; i < languages.Length; i++)
             {
                 if (lang == infoYG.LangName(i))

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace NuclearDecline
@@ -5,6 +6,11 @@ namespace NuclearDecline
     public static class GamePlatformBridge
     {
         private static IPlatformService service;
+        private static ILocalizationService subscribedLocalization;
+        private static string lastForwardedLanguage;
+
+        public static event Action<IPlatformService> PlatformChanged;
+        public static event Action<string> LanguageChanged;
 
         public static IPlatformService Platform
         {
@@ -25,6 +31,8 @@ namespace NuclearDecline
 
         public static void Initialize(IPlatformService platformService = null)
         {
+            IPlatformService previousService = service;
+
             if (platformService != null && service != platformService)
             {
                 if (service != null && service.IsInitialized && !(service is MockPlatformService))
@@ -41,6 +49,10 @@ namespace NuclearDecline
                 service = new MockPlatformService();
 
             service.Initialize();
+            SubscribeLocalization(service.Localization);
+
+            if (previousService != service)
+                PlatformChanged?.Invoke(service);
 
             Debug.Log("[NuclearDecline] GamePlatformBridge initialized: " + service.PlatformName);
         }
@@ -49,6 +61,36 @@ namespace NuclearDecline
         {
             if (service == null || !service.IsInitialized)
                 Initialize();
+        }
+
+        private static void SubscribeLocalization(ILocalizationService localization)
+        {
+            if (subscribedLocalization == localization)
+                return;
+
+            if (subscribedLocalization != null)
+            {
+                subscribedLocalization.OnLanguageChanged -= HandleLanguageChanged;
+                subscribedLocalization.LanguageChanged -= HandleLanguageChanged;
+            }
+
+            subscribedLocalization = localization;
+            lastForwardedLanguage = null;
+
+            if (subscribedLocalization != null)
+            {
+                subscribedLocalization.OnLanguageChanged += HandleLanguageChanged;
+                subscribedLocalization.LanguageChanged += HandleLanguageChanged;
+            }
+        }
+
+        private static void HandleLanguageChanged(string languageCode)
+        {
+            if (lastForwardedLanguage == languageCode)
+                return;
+
+            lastForwardedLanguage = languageCode;
+            LanguageChanged?.Invoke(languageCode);
         }
     }
 }

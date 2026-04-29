@@ -7,7 +7,11 @@ namespace NuclearDecline
     public sealed class MockLocalizationService : ILocalizationService
     {
         private const string LanguageKey = "NuclearDecline.Language";
-        private static readonly string[] Languages = { "ru", "en" };
+        private static readonly string[] Languages =
+        {
+            "ru", "en", "tr", "az", "be", "he", "hy", "ka", "et", "fr", "kk", "ky", "lt", "lv",
+            "ro", "tg", "tk", "uk", "uz", "es", "pt", "ar", "id", "ja", "it", "de", "hi"
+        };
 
         private readonly ISaveService saveService;
         private readonly Dictionary<string, Dictionary<string, string>> textByLanguage =

@@ -6,6 +6,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections;
 using UnityEngine.UI;
+using NuclearDecline;
 
 namespace YG
 {
@@ -168,6 +169,7 @@ namespace YG
                     savesData = (SavesYG)formatter.Deserialize(fs);
                     _SDKEnabled = true;
                     GetDataEvent?.Invoke();
+                    GamePlatformBridge.Localization.SetLanguage(savesData.language);
                     SwitchLangEvent?.Invoke(savesData.language);
                 }
                 catch (Exception e) // если файл поломан
@@ -191,6 +193,7 @@ namespace YG
             savesData = new SavesYG { isFirstSession = false };
 
             _SDKEnabled = true;
+            GamePlatformBridge.Localization.SetLanguage(savesData.language);
             SwitchLangEvent?.Invoke(savesData.language);
             GetDataEvent?.Invoke();
 #else
@@ -472,6 +475,7 @@ namespace YG
             savesData.language = language;
             SaveProgress();
 
+            GamePlatformBridge.Localization.SetLanguage(language);
             SwitchLangEvent?.Invoke(language);
         }
 
@@ -480,6 +484,7 @@ namespace YG
             savesData.language = language;
             SaveProgress();
 
+            GamePlatformBridge.Localization.SetLanguage(language);
             SwitchLangEvent?.Invoke(language);
         }
         #endregion Language
@@ -827,7 +832,10 @@ namespace YG
             if (infoYG.LocalizationEnable && infoYG.callingLanguageCheck == InfoYG.CallingLanguageCheck.EveryGameLaunch)
                 _LanguageRequest();
             else
+            {
+                GamePlatformBridge.Localization.SetLanguage(savesData.language);
                 SwitchLangEvent?.Invoke(savesData.language);
+            }
         }
 
         public void ResetSaveCloud()
@@ -959,6 +967,7 @@ namespace YG
 
             savesData.language = lang;
 
+            GamePlatformBridge.Localization.SetLanguage(lang);
             SwitchLangEvent?.Invoke(lang);
         }
         #endregion Language

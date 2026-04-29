@@ -29,6 +29,9 @@ ISaveService GamePlatformBridge.Saves
 ILocalizationService GamePlatformBridge.Localization
 bool GamePlatformBridge.IsInitialized
 
+event Action<IPlatformService> GamePlatformBridge.PlatformChanged
+event Action<string> GamePlatformBridge.LanguageChanged
+
 void GamePlatformBridge.Initialize(IPlatformService platformService = null)
 ```
 
@@ -38,6 +41,7 @@ Notes:
 - `Initialize()` uses `MockPlatformService` when `platformService` is `null`.
 - A real initialized non-mock platform service is not replaced by later calls.
 - `GamePlatformBridgeBootstrap` initializes the bridge before scene load.
+- `LanguageChanged` is forwarded from the active localization service and remains stable if a mock service is replaced by a platform adapter.
 
 ## IPlatformService
 
@@ -219,12 +223,12 @@ using NuclearDecline;
 
 private void OnEnable()
 {
-    GamePlatformBridge.Localization.LanguageChanged += OnLanguageChanged;
+    GamePlatformBridge.LanguageChanged += OnLanguageChanged;
 }
 
 private void OnDisable()
 {
-    GamePlatformBridge.Localization.LanguageChanged -= OnLanguageChanged;
+    GamePlatformBridge.LanguageChanged -= OnLanguageChanged;
 }
 
 private void OnLanguageChanged(string languageCode)
