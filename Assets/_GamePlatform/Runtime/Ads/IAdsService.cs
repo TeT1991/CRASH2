@@ -4,10 +4,10 @@ namespace GamePlatform.Runtime.Ads
 {
     public interface IAdsService
     {
-        bool IsFullscreenAdAvailable { get; }
-        bool IsRewardedAdAvailable { get; }
+        bool IsInterstitialAvailable { get; }
+        bool IsRewardedAvailable { get; }
 
-        void ShowFullscreenAd(Action<AdResult> onComplete = null);
-        void ShowRewardedAd(string placementId, Action<AdResult> onComplete = null);
+        void ShowInterstitial(Action<AdResult> onComplete = null);
+        void ShowRewarded(string placementId, Action<AdResult> onComplete = null);
     }
 }

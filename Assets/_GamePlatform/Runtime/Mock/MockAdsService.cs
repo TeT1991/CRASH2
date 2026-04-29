@@ -6,16 +6,16 @@ namespace GamePlatform.Runtime.Mock
 {
     public sealed class MockAdsService : IAdsService
     {
-        public bool IsFullscreenAdAvailable => true;
-        public bool IsRewardedAdAvailable => true;
+        public bool IsInterstitialAvailable => true;
+        public bool IsRewardedAvailable => true;
 
-        public void ShowFullscreenAd(Action<AdResult> onComplete = null)
+        public void ShowInterstitial(Action<AdResult> onComplete = null)
         {
-            Debug.Log("[GamePlatform] Mock fullscreen ad shown.");
+            Debug.Log("[GamePlatform] Mock interstitial ad shown.");
             onComplete?.Invoke(AdResult.Completed);
         }
 
-        public void ShowRewardedAd(string placementId, Action<AdResult> onComplete = null)
+        public void ShowRewarded(string placementId, Action<AdResult> onComplete = null)
         {
             Debug.Log("[GamePlatform] Mock rewarded ad shown. Placement: " + placementId);
             onComplete?.Invoke(AdResult.Completed);
