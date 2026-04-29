@@ -1,8 +1,3 @@
-using NuclearDecline.Runtime.Ads;
-using NuclearDecline.Runtime.Core;
-using NuclearDecline.Runtime.Localization;
-using NuclearDecline.Runtime.Mock;
-using NuclearDecline.Runtime.Saves;
 using UnityEngine;
 
 namespace NuclearDecline
@@ -11,7 +6,7 @@ namespace NuclearDecline
     {
         private static IPlatformService service;
 
-        public static IPlatformService Service
+        public static IPlatformService Platform
         {
             get
             {
@@ -20,18 +15,31 @@ namespace NuclearDecline
             }
         }
 
-        public static IAdsService Ads => Service.Ads;
-        public static ILocalizationService Localization => Service.Localization;
-        public static ISaveService Saves => Service.Saves;
+        public static IPlatformService Service => Platform;
+
+        public static IAdsService Ads => Platform.Ads;
+        public static ISaveService Saves => Platform.Saves;
+        public static ILocalizationService Localization => Platform.Localization;
 
         public static bool IsInitialized => service != null && service.IsInitialized;
 
         public static void Initialize(IPlatformService platformService = null)
         {
-            if (service != null && service.IsInitialized)
-                return;
+            if (platformService != null && service != platformService)
+            {
+                if (service != null && service.IsInitialized && !(service is MockPlatformService))
+                    return;
 
-            service = platformService ?? new MockPlatformService();
+                service = platformService;
+            }
+            else if (service != null && service.IsInitialized)
+            {
+                return;
+            }
+
+            if (service == null)
+                service = new MockPlatformService();
+
             service.Initialize();
 
             Debug.Log("[NuclearDecline] GamePlatformBridge initialized: " + service.PlatformName);

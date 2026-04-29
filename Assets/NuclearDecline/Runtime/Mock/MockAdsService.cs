@@ -1,8 +1,7 @@
 using System;
-using NuclearDecline.Runtime.Ads;
 using UnityEngine;
 
-namespace NuclearDecline.Runtime.Mock
+namespace NuclearDecline
 {
     public sealed class MockAdsService : IAdsService
     {
@@ -12,13 +11,13 @@ namespace NuclearDecline.Runtime.Mock
         public void ShowInterstitial(Action<AdResult> onComplete = null)
         {
             Debug.Log("[NuclearDecline] Mock interstitial ad shown.");
-            onComplete?.Invoke(AdResult.Completed);
+            onComplete?.Invoke(AdResult.SuccessResult());
         }
 
         public void ShowRewarded(string placementId, Action<AdResult> onComplete = null)
         {
             Debug.Log("[NuclearDecline] Mock rewarded ad shown. Placement: " + placementId);
-            onComplete?.Invoke(AdResult.Completed);
+            onComplete?.Invoke(AdResult.SuccessResult(placementId));
         }
     }
 }
