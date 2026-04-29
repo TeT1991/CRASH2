@@ -122,6 +122,7 @@ namespace JetSystems
 
             // Set the menu at start
             SetMenu();
+            UpdateCoins();
 		}
 
         private void ConfigureDelegates()

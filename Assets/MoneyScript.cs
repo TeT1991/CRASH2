@@ -1,61 +1,91 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using JetSystems;
 
 public class MoneyScript : MonoBehaviour
 {
-    int[] amounts = { 500, 2000, 5000, 10000 };
-    int currentAmountIndex = 0;
-    int stoppedAmount;
-    bool isStopped = false;
+    private int levelStartCoins;
+    private int earnedCoins;
+    private bool rewardClaimed;
 
     public Text moneyText;
     public Button button;
 
-    void Start()
+    private void OnEnable()
     {
-        StartCoroutine(ChangeAmount());
+        UIManager.onGameSet += ResetEarnedCoins;
+        UIManager.onLevelCompleteSet += UpdateEarnedCoinsOnLevelComplete;
     }
 
-    IEnumerator ChangeAmount()
+    private void OnDisable()
     {
-        while (!isStopped)
-        {
-            int currentAmount = amounts[currentAmountIndex];
-            moneyText.text = "Монет: " + currentAmount;
+        UIManager.onGameSet -= ResetEarnedCoins;
+        UIManager.onLevelCompleteSet -= UpdateEarnedCoinsOnLevelComplete;
+    }
 
-            yield return new WaitForSeconds(1);
-
-            if (!isStopped)
-            {
-                currentAmountIndex = (currentAmountIndex + 1) % amounts.Length;
-            }
-        }
+    void Start()
+    {
+        levelStartCoins = UIManager.COINS;
+        earnedCoins = Mathf.Max(0, UIManager.COINS - levelStartCoins);
+        UpdateRewardText();
     }
 
     public void OnButtonPress()
     {
-        isStopped = true;
-        stoppedAmount = amounts[currentAmountIndex];
-        moneyText.text = "Выиграно: " + stoppedAmount;
+        if (rewardClaimed)
+            return;
 
-        switch (stoppedAmount)
-        {
-            case 500:
-                UIManager.AddCoins(500);
-                break;
-            case 2000:
-                UIManager.AddCoins(2000);
-                break;
-            case 5000:
-                UIManager.AddCoins(5000);
-                break;
-            case 10000:
-                UIManager.AddCoins(10000);
-                break;
-        }
+        int bonus = GetEarnedCoins();
+        earnedCoins = bonus;
+        rewardClaimed = true;
 
-        button.interactable = false;
+        UIManager.AddCoins(bonus);
+
+        if (button != null)
+            button.interactable = false;
+
+        UpdateRewardText();
+    }
+
+    public void SetEarnedCoins(int earnedCoins)
+    {
+        this.earnedCoins = Mathf.Max(0, earnedCoins);
+        rewardClaimed = false;
+
+        if (button != null)
+            button.interactable = true;
+
+        UpdateRewardText();
+    }
+
+    private void ResetEarnedCoins()
+    {
+        levelStartCoins = UIManager.COINS;
+        earnedCoins = 0;
+        rewardClaimed = false;
+
+        if (button != null)
+            button.interactable = true;
+
+        UpdateRewardText();
+    }
+
+    private void UpdateEarnedCoinsOnLevelComplete(int starsCount)
+    {
+        SetEarnedCoins(UIManager.COINS - levelStartCoins);
+    }
+
+    private void UpdateRewardText()
+    {
+        if (moneyText != null)
+            moneyText.text = "Р‘РѕРЅСѓСЃ x2: +" + GetEarnedCoins();
+    }
+
+    private int GetEarnedCoins()
+    {
+        if (earnedCoins > 0)
+            return earnedCoins;
+
+        return Mathf.Max(0, UIManager.COINS - levelStartCoins);
     }
 }
